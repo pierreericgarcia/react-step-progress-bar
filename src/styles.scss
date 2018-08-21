@@ -1,0 +1,50 @@
+.stepProgressBar {
+  height: 0.5em;
+  line-height: 1;
+  border-radius: 0.5em;
+  position: relative;
+  background-color: rgba($color: lightgrey, $alpha: 0.6);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 0;
+
+  .step {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    height: 14px;
+    width: 14px;
+    border-radius: 50%;
+    background-color: lightgrey;
+    z-index: 0;
+    position: absolute;
+    transform: translateX(-50%);
+
+    .stepText {
+      display: block;
+      color: white;
+      font-size: 8px;
+    }
+
+    &.accomplished {
+      background-color: #0074d9;
+    }
+
+    &.big {
+      height: 18px;
+      width: 18px;
+    }
+  }
+
+  & .progression {
+    position: absolute;
+    transition: width 0.3s ease;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    border-radius: 0.5em;
+    background: rgba($color: #0074d9, $alpha: 0.8);
+    z-index: -1;
+  }
+}
