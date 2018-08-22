@@ -14,6 +14,15 @@ type StepProps = {|
 |};
 
 export class Step extends React.Component<StepProps> {
+  shouldComponentUpdate(nextProps) {
+    if (nextProps.position > 100) {
+      return false;
+    } else if (nextProps.position < 0) {
+      return false;
+    }
+    return true;
+  }
+
   render() {
     const {
       accomplished,
@@ -52,6 +61,15 @@ type ProgressBarProps = {|
 |};
 
 export class ProgressBar extends React.Component<ProgressBarProps> {
+  shouldComponentUpdate(nextProps) {
+    if (nextProps.percent > 100) {
+      return false;
+    } else if (nextProps.percent < 0 || nextProps.steps < 0) {
+      return false;
+    }
+    return true;
+  }
+
   render() {
     const {
       percent,
@@ -63,18 +81,15 @@ export class ProgressBar extends React.Component<ProgressBarProps> {
 
     return (
       <div className="stepProgressBar" style={{ backgroundColor: unfillColor }}>
-        {new Array(steps)
-          .fill(0)
-          .map((e, i) => i)
-          .map(step =>
-            children(
-              {
-                accomplished: (100 / (steps - 1)) * step <= percent,
-                position: (100 / (steps - 1)) * step
-              },
-              step
-            )
-          )}
+        {Array.from(Array(steps).keys()).map(step => {
+          return children(
+            {
+              accomplished: (100 / (steps - 1)) * step <= percent,
+              position: (100 / (steps - 1)) * step
+            },
+            step
+          );
+        })}
         <div
           className="progression"
           style={{
