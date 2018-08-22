@@ -1,27 +1,41 @@
 // @flow
 
-import * as React from 'react';
-import './styles.css';
-import classnames from 'classnames';
+import * as React from "react";
+import "./styles.css";
+import classnames from "classnames";
 
-type StepProps = {
+type StepProps = {|
   accomplished: boolean,
   position: number,
   big?: boolean,
   text?: string,
-};
+  unaccomplishedColor?: string,
+  accomplishedColor?: string
+|};
 
 export class Step extends React.Component<StepProps> {
   render() {
-    const { accomplished, big = false, position, text = null } = this.props;
+    const {
+      accomplished,
+      position,
+      big = false,
+      text = null,
+      unaccomplishedColor = null,
+      accomplishedColor = null
+    } = this.props;
 
     return (
       <div
-        className={classnames('step', {
+        className={classnames("step", {
           accomplished,
-          big,
+          big
         })}
-        style={{ left: `${position}%` }}
+        style={{
+          left: `${position}%`,
+          backgroundColor: accomplished
+            ? accomplishedColor
+            : unaccomplishedColor
+        }}
       >
         {text ? <span className="stepText">{text}</span> : null}
       </div>
@@ -29,32 +43,43 @@ export class Step extends React.Component<StepProps> {
   }
 }
 
-type ProgressBarProps = {
+type ProgressBarProps = {|
   percent: number,
   children: Function,
-  steps: number,
-};
+  steps?: number,
+  unfillColor?: string,
+  fillColor?: string
+|};
 
 export class ProgressBar extends React.Component<ProgressBarProps> {
   render() {
-    const { percent, steps = 6, children } = this.props;
+    const {
+      percent,
+      children,
+      steps = 6,
+      unfillColor = null,
+      fillColor = null
+    } = this.props;
 
     return (
-      <div className="stepProgressBar">
-        {new Array(steps).fill(0).map((e,i) => i).map(step =>
-          children(
-            {
-              accomplished: (100 / (steps - 1)) * step <= percent,
-              big: step === 0 || step === steps - 1,
-              position: (100 / (steps - 1)) * step,
-            },
-            step
-          )
-        )}
+      <div className="stepProgressBar" style={{ backgroundColor: unfillColor }}>
+        {new Array(steps)
+          .fill(0)
+          .map((e, i) => i)
+          .map(step =>
+            children(
+              {
+                accomplished: (100 / (steps - 1)) * step <= percent,
+                position: (100 / (steps - 1)) * step
+              },
+              step
+            )
+          )}
         <div
           className="progression"
           style={{
-            width: `${percent}%`,
+            backgroundColor: fillColor,
+            width: `${percent}%`
           }}
         />
       </div>
