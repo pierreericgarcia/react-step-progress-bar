@@ -1,6 +1,6 @@
 {
   "name": "react-step-progress-bar",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A library to easily create progress bar with steps in React ⚛️",
   "main": "index.js",
   "peerDependencies": {

@@ -10,6 +10,10 @@
     <img alt="React Step Progress Bar" src="https://image.ibb.co/fn3Kxe/reactpro2.gif" width="100%" />
 </p>
 
+<p align="center" >
+🌐 Live demo : https://react-step-progress-bar.herokuapp.com/
+</p>
+
 ## Key Features
 
 - Create a `<ProgressBar/>` with `<Step/>`s
