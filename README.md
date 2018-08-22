@@ -6,7 +6,9 @@
 
 <br>
 
-![screenshot](https://image.ibb.co/eg1wSe/Screen_Shot_2018_08_22_at_11_26_21.png)
+<p align="center" >
+    <img alt="React Step Progress Bar" src="https://image.ibb.co/fn3Kxe/reactpro2.gif" width="100%" />
+</p>
 
 ## Key Features
 
