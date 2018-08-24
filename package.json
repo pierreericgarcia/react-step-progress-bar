@@ -1,7 +1,23 @@
 {
   "name": "react-step-progress-bar",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "A library to easily create progress bar with steps in React ⚛️",
+  "keywords": [
+    "reactjs",
+    "react",
+    "react-component",
+    "react-library",
+    "progress-bar",
+    "progress bar",
+    "react progress bar",
+    "react-progress-bar",
+    "react-step-progress-bar",
+    "react.js",
+    "react library",
+    "react component"
+  ],
+  "homepage": "https://github.com/pierreericgarcia/react-step-progress-bar",
+  "license": "MIT",
   "main": "index.js",
   "peerDependencies": {
     "react": ">=15.0.0"
