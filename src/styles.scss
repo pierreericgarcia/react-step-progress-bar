@@ -1,7 +1,7 @@
 .stepProgressBar {
-  height: 0.5em;
+  height: 10px;
   line-height: 1;
-  border-radius: 0.5em;
+  border-radius: 10px;
   position: relative;
   background-color: rgba($color: lightgrey, $alpha: 0.6);
   display: flex;
@@ -44,7 +44,7 @@
     left: 0;
     top: 0;
     bottom: 0;
-    border-radius: 0.5em;
+    border-radius: 10px;
     background: rgba($color: #0074d9, $alpha: 0.8);
     z-index: -1;
   }

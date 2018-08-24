@@ -96,6 +96,18 @@ class StepProgressBar extends React.Component {
       <td>rgba($color: #0074d9, $alpha: 0.8)</td>
       <td>The color of the ProgressBar when it is full</td>
     </tr>
+    <tr>
+      <td>width (in pixel)</td>
+      <td>number</td>
+      <td>100%</td>
+      <td>The width of the progress bar in pixel</td>
+    </tr>
+    <tr>
+      <td>height (in pixel)</td>
+      <td>number</td>
+      <td>10</td>
+      <td>The height of the progress bar in pixel</td>
+    </tr>
   </tbody>
 </table>
 
