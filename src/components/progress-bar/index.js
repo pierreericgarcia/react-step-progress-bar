@@ -30,7 +30,8 @@ type ProgressBarProps = {|
   unfillColor?: string,
   fillColor?: string,
   width?: number,
-  height?: number
+  height?: number,
+  hasStepZero?: boolean
 |};
 
 export class ProgressBar extends React.Component<ProgressBarProps> {
@@ -46,6 +47,22 @@ export class ProgressBar extends React.Component<ProgressBarProps> {
     return true;
   }
 
+  getStepStatus(steps: number, stepIndex: number) {
+    const { percent, hasStepZero } = this.props;
+
+    if (hasStepZero) {
+      return {
+        accomplished: (100 / (steps - 1)) * stepIndex <= percent,
+        position: (100 / (steps - 1)) * stepIndex
+      };
+    } else {
+      return {
+        accomplished: (100 / steps) * (stepIndex + 1) <= percent,
+        position: (100 / steps) * (stepIndex + 1)
+      };
+    }
+  }
+
   render() {
     const {
       percent,
@@ -54,7 +71,8 @@ export class ProgressBar extends React.Component<ProgressBarProps> {
       unfillColor = null,
       fillColor = null,
       width = null,
-      height = null
+      height = null,
+      hasStepZero = true
     } = this.props;
 
     return (
@@ -65,10 +83,12 @@ export class ProgressBar extends React.Component<ProgressBarProps> {
         {/* Here we're creating an array of length steps to loop over it and create as
         many <Step /> component */}
         {Array.from(Array(steps)).map((emptyValue, index) => {
+          const { accomplished, position } = this.getStepStatus(steps, index);
+
           return children(
             {
-              accomplished: (100 / (steps - 1)) * index <= percent,
-              position: (100 / (steps - 1)) * index
+              accomplished,
+              position
             },
             index
           );

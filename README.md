@@ -108,6 +108,12 @@ class StepProgressBar extends React.Component {
       <td>10</td>
       <td>The height of the progress bar in pixel</td>
     </tr>
+    <tr>
+      <td>hasStepZero</td>
+      <td>boolean</td>
+      <td>true</td>
+      <td>Tells if steps position should start at 0 or not</td>
+    </tr>
   </tbody>
 </table>
 
