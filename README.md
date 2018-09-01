@@ -2,7 +2,7 @@
   React Step Progress Bar 🌡
 </h1>
 
-<h4 align="center">A library to easily create progress bar with steps in React ⚛️</h4>
+<h4 align="center">A library to create stunning progress bars and steps in React.</h4>
 
 <br>
 
