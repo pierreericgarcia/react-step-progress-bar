@@ -25,6 +25,8 @@
 
 ## Key Features
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/pierreericgarcia/react-step-progress-bar.svg)](https://greenkeeper.io/)
+
 - Create a `<ProgressBar/>` with `<Step/>`s
 - Customize `<Step/>` text and colors
 - Create and use your own `<Step/>` component
