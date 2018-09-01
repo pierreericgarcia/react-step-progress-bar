@@ -17,6 +17,9 @@
   <a title='License' href="https://github.com/pierreericgarcia/react-step-progress-bar/blob/master/LICENSE">
     <img src='https://img.shields.io/badge/license-MIT-blue.svg' />
   </a>
+  <a title='Greenkeeper' href="https://greenkeeper.io/">
+    <img src='https://badges.greenkeeper.io/pierreericgarcia/react-step-progress-bar.svg' />
+  </a>
 </p>
 
 <p align="center" >
@@ -24,8 +27,6 @@
 </p>
 
 ## Key Features
-
-[![Greenkeeper badge](https://badges.greenkeeper.io/pierreericgarcia/react-step-progress-bar.svg)](https://greenkeeper.io/)
 
 - Create a `<ProgressBar/>` with `<Step/>`s
 - Customize `<Step/>` text and colors
