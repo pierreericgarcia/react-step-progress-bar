@@ -34,7 +34,7 @@ type StepProps = {|
 |};
 
 export class Step extends React.Component<StepProps> {
-  shouldComponentUpdate(nextProps: *) {
+  shouldComponentUpdate(nextProps: StepProps) {
     // Block the render if a value over 100 is passed to position
     if (nextProps.position > 100) {
       return false;

@@ -126,6 +126,12 @@ class StepProgressBar extends React.Component {
       <td>true</td>
       <td>Tells if steps position should start at 0 or not</td>
     </tr>
+    <tr>
+      <td>text</td>
+      <td>string</td>
+      <td></td>
+      <td>Add a text in the middle of the progress bar</td>
+    </tr>
   </tbody>
 </table>
 

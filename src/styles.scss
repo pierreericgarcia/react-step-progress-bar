@@ -1,4 +1,4 @@
-.stepProgressBar {
+.progressBar {
   height: 10px;
   line-height: 1;
   border-radius: 10px;
@@ -36,6 +36,15 @@
       height: 18px;
       width: 18px;
     }
+  }
+
+  .progressBarText {
+    color: white;
+    font-size: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 
   & .progression {

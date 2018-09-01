@@ -31,24 +31,27 @@ type ProgressBarProps = {|
   fillColor?: string,
   width?: number,
   height?: number,
-  hasStepZero?: boolean
+  hasStepZero?: boolean,
+  text?: string
 |};
 
 export class ProgressBar extends React.Component<ProgressBarProps> {
-  shouldComponentUpdate(nextProps: *) {
+  shouldComponentUpdate(nextProps: ProgressBarProps) {
     // Block the render if a value over 100 is passed to percent
     if (nextProps.percent > 100) {
       return false;
       // Block the render if a value under 0 is passed to percent
-      // or a value under 0 is passed to steps
-    } else if (nextProps.percent < 0 || nextProps.steps < 0) {
+    } else if (nextProps.percent < 0) {
+      return false;
+      // Block the rende if a value under 0 is passed to steps
+    } else if (nextProps.steps != null && nextProps.steps < 0) {
       return false;
     }
     return true;
   }
 
   getStepStatus(steps: number, stepIndex: number) {
-    const { percent, hasStepZero } = this.props;
+    const { percent, hasStepZero = true } = this.props;
 
     if (hasStepZero) {
       return {
@@ -72,12 +75,12 @@ export class ProgressBar extends React.Component<ProgressBarProps> {
       fillColor = null,
       width = null,
       height = null,
-      hasStepZero = true
+      text = null
     } = this.props;
 
     return (
       <div
-        className="stepProgressBar"
+        className="progressBar"
         style={{ backgroundColor: unfillColor, width, height }}
       >
         {/* Here we're creating an array of length steps to loop over it and create as
@@ -93,6 +96,7 @@ export class ProgressBar extends React.Component<ProgressBarProps> {
             index
           );
         })}
+        {text ? <div className="progressBarText">{text}</div> : null}
         <div
           className="progression"
           style={{
