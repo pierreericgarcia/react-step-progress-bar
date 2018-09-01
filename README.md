@@ -11,6 +11,15 @@
 </p>
 
 <p align="center" >
+  <a title="npm version" href="https://www.npmjs.com/package/react-step-progress-bar">
+    <img alt="npm version" src="https://badge.fury.io/js/react-step-progress-bar.svg"/>
+  </a>
+  <a title='License' href="https://github.com/pierreericgarcia/react-step-progress-bar/blob/master/LICENSE">
+    <img src='https://img.shields.io/badge/license-MIT-blue.svg' />
+  </a>
+</p>
+
+<p align="center" >
 🌐 Live demo : https://react-step-progress-bar.herokuapp.com/
 </p>
 
