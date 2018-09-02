@@ -13,30 +13,11 @@
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    height: 14px;
-    width: 14px;
-    border-radius: 50%;
-    background-color: lightgrey;
     z-index: 0;
     position: absolute;
     transform: translateX(-50%);
     transition-property: all;
     transition-timing-function: ease;
-
-    .stepText {
-      display: block;
-      color: white;
-      font-size: 8px;
-    }
-
-    &.accomplished {
-      background-color: #0074d9;
-    }
-
-    &.big {
-      height: 18px;
-      width: 18px;
-    }
   }
 
   .progressBarText {

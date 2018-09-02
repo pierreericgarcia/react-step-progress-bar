@@ -24,20 +24,14 @@ Position only accepts values between 0 and 100.
 import * as React from "react";
 import classnames from "classnames";
 import Transition from "react-transition-group/Transition";
+import { transitions } from "./transitions";
 
 type StepProps = {|
   accomplished: boolean,
   position: number,
-  big?: boolean,
-  text?: string,
-  unaccomplishedColor?: string,
-  accomplishedColor?: string,
-  transitionStyles?: {
-    entering?: { [cssProperty: string]: string | number },
-    entered?: { [cssProperty: string]: string | number },
-    exiting?: { [cssProperty: string]: string | number },
-    exited?: { [cssProperty: string]: string | number }
-  },
+  index: number,
+  children: Function,
+  transition?: string,
   transitionDuration?: number
 |};
 
@@ -57,39 +51,33 @@ export class Step extends React.Component<StepProps> {
     const {
       accomplished,
       position,
-      big = false,
-      text = null,
-      unaccomplishedColor = null,
-      accomplishedColor = null,
-      transitionStyles = {
-        entering: null,
-        entered: null,
-        exiting: null,
-        exited: null
-      },
+      index,
+      children,
+      transition = null,
       transitionDuration = 300
     } = this.props;
 
     return (
       <Transition in={accomplished} timeout={transitionDuration}>
-        {state => (
-          <div
-            className={classnames("step", {
-              accomplished,
-              big
-            })}
-            style={{
-              ...transitionStyles[state],
-              transitionDuration: `${transitionDuration}ms`,
-              left: `${position}%`,
-              backgroundColor: accomplished
-                ? accomplishedColor
-                : unaccomplishedColor
-            }}
-          >
-            {text ? <span className="stepText">{text}</span> : null}
-          </div>
-        )}
+        {state => {
+          let style = {
+            transitionDuration: `${transitionDuration}ms`,
+            left: `${position}%`
+          };
+
+          if (transition) {
+            style = {
+              ...style,
+              ...transitions[transition][state]
+            };
+          }
+
+          return (
+            <div className="step" style={style}>
+              {children({ accomplished, position, state, index })}
+            </div>
+          );
+        }}
       </Transition>
     );
   }

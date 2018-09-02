@@ -83,24 +83,24 @@ export class ProgressBar extends React.Component<ProgressBarProps> {
         className="progressBar"
         style={{ backgroundColor: unfillColor, width, height }}
       >
-        {/* Here we're creating an array of length steps to loop over it and create as
-        many <Step /> component */}
-        {Array.from(Array(steps)).map((emptyValue, index) => {
-          const { accomplished, position } = this.getStepStatus(steps, index);
-
-          return children(
-            {
-              accomplished,
-              position
-            },
+        {/* Here we're looping over the children to clone them and add them custom props */}
+        {React.Children.map(children, (step, index) => {
+          const { accomplished, position } = this.getStepStatus(
+            children.length,
             index
           );
+
+          return React.cloneElement(step, {
+            accomplished,
+            position,
+            index
+          });
         })}
         {text ? <div className="progressBarText">{text}</div> : null}
         <div
           className="progression"
           style={{
-            backgroundColor: fillColor,
+            background: fillColor,
             width: `${percent}%`
           }}
         />
