@@ -20,7 +20,8 @@
     z-index: 0;
     position: absolute;
     transform: translateX(-50%);
-    transition: background-color 0.3s ease;
+    transition-property: all;
+    transition-timing-function: ease;
 
     .stepText {
       display: block;

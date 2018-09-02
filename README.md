@@ -183,6 +183,18 @@ class StepProgressBar extends React.Component {
       <td>#0074d9</td>
       <td>Color of the Step when it is accomplished</td>
     </tr>
+    <tr>
+      <td>transitionStyles</td>
+      <td>object</td>
+      <td></td>
+      <td>This object lets you define css rules depending on the current state of the step. There are 4 main states a Step can be in: entering, entered, exiting and exited.</td>
+    </tr>
+    <tr>
+      <td>transitionDuration (in ms)</td>
+      <td>number</td>
+      <td>300</td>
+      <td>This lets you define how many milliseconds will be lasting the transition from one state to an other.</td>
+    </tr>
   </tbody>
 </table>
 

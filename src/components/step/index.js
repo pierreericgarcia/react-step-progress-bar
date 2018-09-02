@@ -23,6 +23,7 @@ Position only accepts values between 0 and 100.
 
 import * as React from "react";
 import classnames from "classnames";
+import Transition from "react-transition-group/Transition";
 
 type StepProps = {|
   accomplished: boolean,
@@ -30,7 +31,14 @@ type StepProps = {|
   big?: boolean,
   text?: string,
   unaccomplishedColor?: string,
-  accomplishedColor?: string
+  accomplishedColor?: string,
+  transitionStyles?: {
+    entering?: { [cssProperty: string]: string | number },
+    entered?: { [cssProperty: string]: string | number },
+    exiting?: { [cssProperty: string]: string | number },
+    exited?: { [cssProperty: string]: string | number }
+  },
+  transitionDuration?: number
 |};
 
 export class Step extends React.Component<StepProps> {
@@ -52,24 +60,37 @@ export class Step extends React.Component<StepProps> {
       big = false,
       text = null,
       unaccomplishedColor = null,
-      accomplishedColor = null
+      accomplishedColor = null,
+      transitionStyles = {
+        entering: null,
+        entered: null,
+        exiting: null,
+        exited: null
+      },
+      transitionDuration = 300
     } = this.props;
 
     return (
-      <div
-        className={classnames("step", {
-          accomplished,
-          big
-        })}
-        style={{
-          left: `${position}%`,
-          backgroundColor: accomplished
-            ? accomplishedColor
-            : unaccomplishedColor
-        }}
-      >
-        {text ? <span className="stepText">{text}</span> : null}
-      </div>
+      <Transition in={accomplished} timeout={transitionDuration}>
+        {state => (
+          <div
+            className={classnames("step", {
+              accomplished,
+              big
+            })}
+            style={{
+              ...transitionStyles[state],
+              transitionDuration: `${transitionDuration}ms`,
+              left: `${position}%`,
+              backgroundColor: accomplished
+                ? accomplishedColor
+                : unaccomplishedColor
+            }}
+          >
+            {text ? <span className="stepText">{text}</span> : null}
+          </div>
+        )}
+      </Transition>
     );
   }
 }
