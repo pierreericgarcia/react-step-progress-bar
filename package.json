@@ -24,10 +24,11 @@
   },
   "dependencies": {
     "classnames": "^2.2.6",
+    "invariant": "^2.2.4",
     "react-transition-group": "^2.4.0"
   },
   "scripts": {
-    "build-css": "node-sass-chokidar src/ -o src/",
+    "build-css": "node-sass-chokidar src/ -o .",
     "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "microbundle watch --jsx React.createElement",

@@ -21,7 +21,9 @@ If nothing is passed, it will renders a progress bar without any intermediate st
 */
 
 import * as React from "react";
+import invariant from "invariant";
 import classnames from "classnames";
+import { Step } from "../step";
 
 type ProgressBarProps = {|
   percent: number,
@@ -36,22 +38,19 @@ type ProgressBarProps = {|
 |};
 
 export class ProgressBar extends React.Component<ProgressBarProps> {
-  shouldComponentUpdate(nextProps: ProgressBarProps) {
-    // Block the render if a value over 100 is passed to percent
-    if (nextProps.percent > 100) {
-      return false;
-      // Block the render if a value under 0 is passed to percent
-    } else if (nextProps.percent < 0) {
-      return false;
-      // Block the rende if a value under 0 is passed to steps
-    } else if (nextProps.steps != null && nextProps.steps < 0) {
-      return false;
+  getPercent() {
+    const { percent } = this.props;
+
+    if (percent > 100 || percent < 0 || typeof percent != "number") {
+      console.warn(
+        `[react-step-progress-bar]: The value passed to percent needs to be a number between 0 and 100 (passed value: ${percent}).`
+      );
     }
-    return true;
+    return Math.min(100, Math.max(this.props.percent, 0));
   }
 
-  getStepStatus(steps: number, stepIndex: number) {
-    const { percent, hasStepZero = true } = this.props;
+  getStepStatus(percent: number, steps: number, stepIndex: number) {
+    const { hasStepZero = true } = this.props;
 
     if (hasStepZero) {
       return {
@@ -68,7 +67,6 @@ export class ProgressBar extends React.Component<ProgressBarProps> {
 
   render() {
     const {
-      percent,
       children,
       steps = 0,
       unfillColor = null,
@@ -78,6 +76,8 @@ export class ProgressBar extends React.Component<ProgressBarProps> {
       text = null
     } = this.props;
 
+    const percent = this.getPercent();
+
     return (
       <div
         className="progressBar"
@@ -85,7 +85,12 @@ export class ProgressBar extends React.Component<ProgressBarProps> {
       >
         {/* Here we're looping over the children to clone them and add them custom props */}
         {React.Children.map(children, (step, index) => {
+          invariant(
+            step.type === Step,
+            "<ProgressBar/> only accepts <Step/> has children."
+          );
           const { accomplished, position } = this.getStepStatus(
+            percent,
             children.length,
             index
           );
