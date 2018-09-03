@@ -74,7 +74,12 @@ export class Step extends React.Component<StepProps> {
 
           return (
             <div className="step" style={style}>
-              {children({ accomplished, position, state, index })}
+              {children({
+                accomplished,
+                position,
+                transitionState: state,
+                index
+              })}
             </div>
           );
         }}

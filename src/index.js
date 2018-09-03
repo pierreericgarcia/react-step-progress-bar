@@ -1,4 +1,4 @@
-import { ProgressBar } from "./components/progress-bar";
-import { Step } from "./components/step";
+// @flow
 
-export { ProgressBar, Step };
+export { ProgressBar } from "./components/progress-bar";
+export { Step } from "./components/step";

@@ -28,9 +28,9 @@ import { Step } from "../step";
 type ProgressBarProps = {|
   percent: number,
   children: Function,
-  steps?: number,
-  unfillColor?: string,
-  fillColor?: string,
+  positions?: [number],
+  unfillBackground?: string,
+  fillBackground?: string,
   width?: number,
   height?: number,
   hasStepZero?: boolean,
@@ -49,28 +49,26 @@ export class ProgressBar extends React.Component<ProgressBarProps> {
     return Math.min(100, Math.max(this.props.percent, 0));
   }
 
-  getStepStatus(percent: number, steps: number, stepIndex: number) {
+  getPosition(percent: number, steps: number, stepIndex: number) {
     const { hasStepZero = true } = this.props;
 
     if (hasStepZero) {
-      return {
-        accomplished: (100 / (steps - 1)) * stepIndex <= percent,
-        position: (100 / (steps - 1)) * stepIndex
-      };
+      return (100 / (steps - 1)) * stepIndex;
     } else {
-      return {
-        accomplished: (100 / steps) * (stepIndex + 1) <= percent,
-        position: (100 / steps) * (stepIndex + 1)
-      };
+      return (100 / steps) * (stepIndex + 1);
     }
+  }
+
+  getAccomplishmentStatus(percent: number) {
+    return this.getPosition() <= percent;
   }
 
   render() {
     const {
       children,
-      steps = 0,
-      unfillColor = null,
-      fillColor = null,
+      positions = [],
+      unfillBackground = null,
+      fillBackground = null,
       width = null,
       height = null,
       text = null
@@ -81,7 +79,7 @@ export class ProgressBar extends React.Component<ProgressBarProps> {
     return (
       <div
         className="progressBar"
-        style={{ backgroundColor: unfillColor, width, height }}
+        style={{ background: unfillBackground, width, height }}
       >
         {/* Here we're looping over the children to clone them and add them custom props */}
         {React.Children.map(children, (step, index) => {
@@ -89,11 +87,17 @@ export class ProgressBar extends React.Component<ProgressBarProps> {
             step.type === Step,
             "<ProgressBar/> only accepts <Step/> has children."
           );
-          const { accomplished, position } = this.getStepStatus(
+          let { accomplished, position } = this.getStepStatus(
             percent,
             children.length,
             index
           );
+
+          // if (positions.length === children.length) {
+          //   position = positions[index];
+          // } else {
+
+          // }
 
           return React.cloneElement(step, {
             accomplished,
@@ -105,7 +109,7 @@ export class ProgressBar extends React.Component<ProgressBarProps> {
         <div
           className="progression"
           style={{
-            background: fillColor,
+            background: fillBackground,
             width: `${percent}%`
           }}
         />
