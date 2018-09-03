@@ -28,7 +28,7 @@ import { Step } from "../step";
 type ProgressBarProps = {|
   percent: number,
   children: Function,
-  positions?: [number],
+  stepPositions?: Array<number>,
   unfillBackground?: string,
   fillBackground?: string,
   width?: number,
@@ -49,7 +49,7 @@ export class ProgressBar extends React.Component<ProgressBarProps> {
     return Math.min(100, Math.max(this.props.percent, 0));
   }
 
-  getPosition(percent: number, steps: number, stepIndex: number) {
+  getPosition(steps: number, stepIndex: number) {
     const { hasStepZero = true } = this.props;
 
     if (hasStepZero) {
@@ -59,20 +59,21 @@ export class ProgressBar extends React.Component<ProgressBarProps> {
     }
   }
 
-  getAccomplishmentStatus(percent: number) {
-    return this.getPosition() <= percent;
-  }
-
   render() {
     const {
       children,
-      positions = [],
+      stepPositions = [],
       unfillBackground = null,
       fillBackground = null,
       width = null,
       height = null,
       text = null
     } = this.props;
+
+    invariant(
+      !(stepPositions.length > 0 && stepPositions.length !== children.length),
+      "When specifying a stepPositions props, the number of children must match the length of the positions array."
+    );
 
     const percent = this.getPercent();
 
@@ -87,25 +88,21 @@ export class ProgressBar extends React.Component<ProgressBarProps> {
             step.type === Step,
             "<ProgressBar/> only accepts <Step/> has children."
           );
-          let { accomplished, position } = this.getStepStatus(
-            percent,
-            children.length,
-            index
-          );
 
-          // if (positions.length === children.length) {
-          //   position = positions[index];
-          // } else {
-
-          // }
+          const position =
+            stepPositions.length > 0
+              ? stepPositions[index]
+              : this.getPosition(children.length, index);
 
           return React.cloneElement(step, {
-            accomplished,
+            accomplished: position <= percent,
             position,
             index
           });
         })}
+
         {text ? <div className="progressBarText">{text}</div> : null}
+
         <div
           className="progression"
           style={{

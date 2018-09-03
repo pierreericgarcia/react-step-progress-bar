@@ -23,6 +23,7 @@ Position only accepts values between 0 and 100.
 
 import * as React from "react";
 import classnames from "classnames";
+import invariant from "invariant";
 import Transition from "react-transition-group/Transition";
 import { transitions } from "./transitions";
 
@@ -31,41 +32,46 @@ type StepProps = {|
   position: number,
   index: number,
   children: Function,
-  transition?: string,
+  transition?: "scale" | "rotate" | "skew",
   transitionDuration?: number
 |};
 
 export class Step extends React.Component<StepProps> {
-  shouldComponentUpdate(nextProps: StepProps) {
-    // Block the render if a value over 100 is passed to position
-    if (nextProps.position > 100) {
-      return false;
-      // Block the render if a value under 0 is passed to position
-    } else if (nextProps.position < 0) {
-      return false;
-    }
-    return true;
+  getPosition() {
+    const { position } = this.props;
+
+    invariant(
+      !(position > 100 || position < 0 || typeof position != "number"),
+      `The value passed to position needs to be a number between 0 and 100 (passed value: ${position}).`
+    );
+
+    return Math.min(100, Math.max(this.props.position, 0));
   }
 
   render() {
     const {
       accomplished,
-      position,
       index,
       children,
       transition = null,
       transitionDuration = 300
     } = this.props;
 
+    const position = this.getPosition();
+
+    let style = {
+      left: `${position}%`,
+      transitionDuration: `${transitionDuration}ms`
+    };
+
     return (
       <Transition in={accomplished} timeout={transitionDuration}>
         {state => {
-          let style = {
-            transitionDuration: `${transitionDuration}ms`,
-            left: `${position}%`
-          };
-
           if (transition) {
+            invariant(
+              transitions[transition] != null,
+              `${transition} is not listed in the built-in transitions.`
+            );
             style = {
               ...style,
               ...transitions[transition][state]
