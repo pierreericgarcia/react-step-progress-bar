@@ -27,7 +27,7 @@ import { Step } from "../step";
 
 type ProgressBarProps = {|
   percent: number,
-  children: Function,
+  children: React.ChildrenArray<React.Element<typeof Step>>,
   stepPositions?: Array<number>,
   unfillBackground?: string,
   fillBackground?: string,
@@ -71,7 +71,10 @@ export class ProgressBar extends React.Component<ProgressBarProps> {
     } = this.props;
 
     invariant(
-      !(stepPositions.length > 0 && stepPositions.length !== children.length),
+      !(
+        stepPositions.length > 0 &&
+        stepPositions.length !== React.Children.count(children)
+      ),
       "When specifying a stepPositions props, the number of children must match the length of the positions array."
     );
 
@@ -84,15 +87,10 @@ export class ProgressBar extends React.Component<ProgressBarProps> {
       >
         {/* Here we're looping over the children to clone them and add them custom props */}
         {React.Children.map(children, (step, index) => {
-          invariant(
-            step.type === Step,
-            "<ProgressBar/> only accepts <Step/> has children."
-          );
-
           const position =
             stepPositions.length > 0
               ? stepPositions[index]
-              : this.getPosition(children.length, index);
+              : this.getPosition(React.Children.count(children), index);
 
           return React.cloneElement(step, {
             accomplished: position <= percent,

@@ -31,7 +31,12 @@ type StepProps = {|
   accomplished: boolean,
   position: number,
   index: number,
-  children: Function,
+  children: ({
+    accomplished: boolean,
+    transitionState: string,
+    index: number,
+    position: number
+  }) => React.Node,
   transition?: "scale" | "rotate" | "skew",
   transitionDuration?: number
 |};
