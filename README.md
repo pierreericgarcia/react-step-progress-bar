@@ -140,27 +140,27 @@ class StepProgressBar extends React.Component {
     </tr>
     <tr>
       <td>children</td>
-      <td>function</td>
+      <td>Step component(s)</td>
       <td></td>
-      <td>The function used to render the Step components</td>
+      <td>ProgressBar only accepts Step as children</td>
     </tr>
     <tr>
-      <td>steps</td>
-      <td>number</td>
-      <td>6</td>
-      <td>The number of Step render in the ProgressBar</td>
+      <td>stepPositions</td>
+      <td>array of numbers</td>
+      <td></td>
+      <td>By default Steps are spaced linearly on the ProgressBar. You can override this by specifying the positions of the steps (in percent)</td>
     </tr>
     <tr>
-      <td>unfillColor</td>
+      <td>unfillBackground</td>
       <td>string</td>
-      <td>rgba($color: lightgrey, $alpha: 0.6)</td>
-      <td>The color of the ProgressBar when it is empty</td>
+      <td>rgba($color: lightgrey, $alpha: 0.6);</td>
+      <td>This props is used directly on the CSS background property of the unfilled part of the ProgressBar.</td>
     </tr>
     <tr>
-      <td>fillColor</td>
+      <td>fillBackground</td>
       <td>string</td>
       <td>rgba($color: #0074d9, $alpha: 0.8)</td>
-      <td>The color of the ProgressBar when it is full</td>
+      <td>This props is used directly on the CSS background property of the filled part of the ProgressBar</td>
     </tr>
     <tr>
       <td>width (in pixel)</td>
@@ -214,40 +214,28 @@ class StepProgressBar extends React.Component {
       <td>The position in percentage of the Step on the ProgressBar</td>
     </tr>
     <tr>
-      <td>big</td>
-      <td>boolean</td>
-      <td>false</td>
-      <td>Set the size of the Step</td>
+      <td>index</td>
+      <td>number</td>
+      <td></td>
+      <td>The index of the Step in the ProgressBar</td>
     </tr>
     <tr>
-      <td>text</td>
+      <td>children</td>
+      <td>function</td>
+      <td></td>
+      <td>The function used to render the content of the Step</td>
+    </tr>
+    <tr>
+      <td>transition</td>
       <td>string</td>
       <td></td>
-      <td>The text hold in the Step</td>
-    </tr>
-    <tr>
-      <td>unaccomplishedColor</td>
-      <td>string</td>
-      <td>lightgrey</td>
-      <td>Color of the Step when not accomplished yet</td>
-    </tr>
-    <tr>
-      <td>accomplishedColor</td>
-      <td>string</td>
-      <td>#0074d9</td>
-      <td>Color of the Step when it is accomplished</td>
-    </tr>
-    <tr>
-      <td>transitionStyles</td>
-      <td>object</td>
-      <td></td>
-      <td>This object lets you define css rules depending on the current state of the step. There are 4 main states a Step can be in: entering, entered, exiting and exited.</td>
+      <td>Use one of the built-ins transitions</td>
     </tr>
     <tr>
       <td>transitionDuration (in ms)</td>
-      <td>number</td>
+      <td>string</td>
       <td>300</td>
-      <td>This lets you define how many milliseconds will be lasting the transition from one state to an other.</td>
+      <td>The duration of the transition</td>
     </tr>
   </tbody>
 </table>
