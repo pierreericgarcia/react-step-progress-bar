@@ -7,7 +7,7 @@
 <br>
 
 <p align="center" >
-    <img alt="React Step Progress Bar" src="https://image.ibb.co/fn3Kxe/reactpro2.gif" width="100%" />
+    <img alt="React Step Progress Bar" src="https://image.ibb.co/iukmPe/react_step_progress_bar.gif" width="100%" />
 </p>
 
 <p align="center" >
@@ -23,14 +23,14 @@
 </p>
 
 <p align="center" >
-🌐 Live demo : https://react-step-progress-bar.herokuapp.com/
+  🌐 <a href="https://react-step-progress-bar.herokuapp.com/">LIVE DEMO</a> 🌐
 </p>
 
 ## Key Features
 
-- Create a `<ProgressBar/>` with `<Step/>`s
-- Customize `<Step/>` text and colors
-- Create and use your own `<Step/>` component
+- Create simple progress bars or with steps 🌡
+- Customize your steps as you want 🎨
+- Create your own step animations 🎥
 
 ## Installation
 
@@ -48,16 +48,70 @@ yarn add react-step-progress-bar
 
 ## Example
 
+### Simple progress bar
+
+This example demonstrate how to create a simple progress bar.
+
 ```jsx
-import { React } from "react";
-import "react-step-progress-bar/index.css";
+import React from "react";
+import "react-step-progress-bar/styles.css";
+import { ProgressBar } from "react-step-progress-bar";
+
+class ProgressBar extends React.Component {
+  render() {
+    return (
+      <ProgressBar
+        percent={75}
+        fillBackground="linear-gradient(to right, #fefb72, #f0bb31)"
+      />
+    );
+  }
+}
+```
+
+### Progress bar with steps
+
+This example demonstrate how to create your own progress bar with steps.
+
+```jsx
+import React from "react";
+import "react-step-progress-bar/styles.css";
 import { ProgressBar, Step } from "react-step-progress-bar";
 
 class StepProgressBar extends React.Component {
   render() {
     return (
-      <ProgressBar percent={75} steps={8}>
-        {({ ...props }, index) => <Step {...props} text={index + 1} />}
+      <ProgressBar
+        percent={75}
+        fillBackground="linear-gradient(to right, #fefb72, #f0bb31)"
+      >
+        <Step transition="scale">
+          {({ accomplished }) => (
+            <img
+              style={{ filter: `grayscale(${accomplished ? 0 : 80}%)` }}
+              width="30"
+              src="https://vignette.wikia.nocookie.net/pkmnshuffle/images/9/9d/Pichu.png/revision/latest?cb=20170407222851"
+            />
+          )}
+        </Step>
+        <Step transition="scale">
+          {({ accomplished }) => (
+            <img
+              style={{ filter: `grayscale(${accomplished ? 0 : 80}%)` }}
+              width="30"
+              src="https://vignette.wikia.nocookie.net/pkmnshuffle/images/9/97/Pikachu_%28Smiling%29.png/revision/latest?cb=20170410234508"
+            />
+          )}
+        </Step>
+        <Step transition="scale">
+          {({ accomplished }) => (
+            <img
+              style={{ filter: `grayscale(${accomplished ? 0 : 80}%)` }}
+              width="30"
+              src="https://orig00.deviantart.net/493a/f/2017/095/5/4/raichu_icon_by_pokemonshuffle_icons-db4ryym.png"
+            />
+          )}
+        </Step>
       </ProgressBar>
     );
   }
