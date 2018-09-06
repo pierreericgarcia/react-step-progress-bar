@@ -38,20 +38,20 @@ type ProgressBarProps = {|
 |};
 
 export class ProgressBar extends React.Component<ProgressBarProps> {
-  getPercent() {
-    const { percent } = this.props;
-
+  static getSafePercent(percent: number) {
     if (percent > 100 || percent < 0 || typeof percent != "number") {
       console.warn(
         `[react-step-progress-bar]: The value passed to percent needs to be a number between 0 and 100 (passed value: ${percent}).`
       );
     }
-    return Math.min(100, Math.max(this.props.percent, 0));
+    return Math.min(100, Math.max(percent, 0));
   }
 
-  getPosition(steps: number, stepIndex: number) {
-    const { hasStepZero = true } = this.props;
-
+  static getStepPosition(
+    steps: number,
+    stepIndex: number,
+    hasStepZero: boolean
+  ) {
     if (hasStepZero) {
       return (100 / (steps - 1)) * stepIndex;
     } else {
@@ -61,12 +61,14 @@ export class ProgressBar extends React.Component<ProgressBarProps> {
 
   render() {
     const {
+      percent,
       children,
       stepPositions = [],
       unfillBackground = null,
       fillBackground = null,
       width = null,
       height = null,
+      hasStepZero = true,
       text = null
     } = this.props;
 
@@ -78,7 +80,7 @@ export class ProgressBar extends React.Component<ProgressBarProps> {
       "When specifying a stepPositions props, the number of children must match the length of the positions array."
     );
 
-    const percent = this.getPercent();
+    const safePercent = ProgressBar.getSafePercent(percent);
 
     return (
       <div
@@ -90,10 +92,14 @@ export class ProgressBar extends React.Component<ProgressBarProps> {
           const position =
             stepPositions.length > 0
               ? stepPositions[index]
-              : this.getPosition(React.Children.count(children), index);
+              : ProgressBar.getStepPosition(
+                  React.Children.count(children),
+                  index,
+                  hasStepZero
+                );
 
           return React.cloneElement(step, {
-            accomplished: position <= percent,
+            accomplished: position <= safePercent,
             position,
             index
           });
@@ -105,7 +111,7 @@ export class ProgressBar extends React.Component<ProgressBarProps> {
           className="progression"
           style={{
             background: fillBackground,
-            width: `${percent}%`
+            width: `${safePercent}%`
           }}
         />
       </div>

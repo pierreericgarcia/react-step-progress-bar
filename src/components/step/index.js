@@ -24,7 +24,7 @@ Position only accepts values between 0 and 100.
 import * as React from "react";
 import classnames from "classnames";
 import invariant from "invariant";
-import Transition from "react-transition-group/Transition";
+import { Transition } from "react-transition-group";
 import { transitions } from "./transitions";
 
 type StepProps = {|
@@ -42,30 +42,30 @@ type StepProps = {|
 |};
 
 export class Step extends React.Component<StepProps> {
-  getPosition() {
-    const { position } = this.props;
+  static getSafePosition(position: number) {
+    if (position > 100 || position < 0 || typeof position != "number") {
+      console.warn(
+        `The value passed to position needs to be a number between 0 and 100 (passed value: ${position}).`
+      );
+    }
 
-    invariant(
-      !(position > 100 || position < 0 || typeof position != "number"),
-      `The value passed to position needs to be a number between 0 and 100 (passed value: ${position}).`
-    );
-
-    return Math.min(100, Math.max(this.props.position, 0));
+    return Math.min(100, Math.max(position, 0));
   }
 
   render() {
     const {
       accomplished,
+      position,
       index,
       children,
       transition = null,
       transitionDuration = 300
     } = this.props;
 
-    const position = this.getPosition();
+    const safePosition = Step.getSafePosition(position);
 
     let style = {
-      left: `${position}%`,
+      left: `${safePosition}%`,
       transitionDuration: `${transitionDuration}ms`
     };
 
@@ -87,7 +87,7 @@ export class Step extends React.Component<StepProps> {
             <div className="step" style={style}>
               {children({
                 accomplished,
-                position,
+                position: safePosition,
                 transitionState: state,
                 index
               })}
