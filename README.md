@@ -17,6 +17,9 @@
   <a title='License' href="https://github.com/pierreericgarcia/react-step-progress-bar/blob/master/LICENSE">
     <img src='https://img.shields.io/badge/license-MIT-blue.svg' />
   </a>
+   <a title='build' href="https://travis-ci.org/pierreericgarcia/react-step-progress-bar">
+    <img src='https://travis-ci.org/pierreericgarcia/react-step-progress-bar.svg?branch=master' />
+  </a>
   <a title='Greenkeeper' href="https://greenkeeper.io/">
     <img src='https://badges.greenkeeper.io/pierreericgarcia/react-step-progress-bar.svg' />
   </a>
