@@ -24,6 +24,7 @@ import * as React from "react";
 import invariant from "invariant";
 import classnames from "classnames";
 import { Step } from "../step";
+import { getSafePercent, getStepPosition } from "../../utils";
 
 type ProgressBarProps = {|
   percent: number,
@@ -38,27 +39,6 @@ type ProgressBarProps = {|
 |};
 
 export class ProgressBar extends React.Component<ProgressBarProps> {
-  static getSafePercent(percent: number) {
-    if (percent > 100 || percent < 0 || typeof percent != "number") {
-      console.warn(
-        `[react-step-progress-bar]: The value passed to percent needs to be a number between 0 and 100 (passed value: ${percent}).`
-      );
-    }
-    return Math.min(100, Math.max(percent, 0));
-  }
-
-  static getStepPosition(
-    steps: number,
-    stepIndex: number,
-    hasStepZero: boolean
-  ) {
-    if (hasStepZero) {
-      return (100 / (steps - 1)) * stepIndex;
-    } else {
-      return (100 / steps) * (stepIndex + 1);
-    }
-  }
-
   render() {
     const {
       percent,
@@ -80,7 +60,7 @@ export class ProgressBar extends React.Component<ProgressBarProps> {
       "When specifying a stepPositions props, the number of children must match the length of the positions array."
     );
 
-    const safePercent = ProgressBar.getSafePercent(percent);
+    const safePercent = getSafePercent(percent);
 
     return (
       <div
@@ -92,7 +72,7 @@ export class ProgressBar extends React.Component<ProgressBarProps> {
           const position =
             stepPositions.length > 0
               ? stepPositions[index]
-              : ProgressBar.getStepPosition(
+              : getStepPosition(
                   React.Children.count(children),
                   index,
                   hasStepZero

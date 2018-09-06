@@ -26,6 +26,7 @@ import classnames from "classnames";
 import invariant from "invariant";
 import { Transition } from "react-transition-group";
 import { transitions } from "./transitions";
+import { getSafePercent } from "../../utils";
 
 type StepProps = {|
   accomplished: boolean,
@@ -42,16 +43,6 @@ type StepProps = {|
 |};
 
 export class Step extends React.Component<StepProps> {
-  static getSafePosition(position: number) {
-    if (position > 100 || position < 0 || typeof position != "number") {
-      console.warn(
-        `The value passed to position needs to be a number between 0 and 100 (passed value: ${position}).`
-      );
-    }
-
-    return Math.min(100, Math.max(position, 0));
-  }
-
   render() {
     const {
       accomplished,
@@ -62,7 +53,7 @@ export class Step extends React.Component<StepProps> {
       transitionDuration = 300
     } = this.props;
 
-    const safePosition = Step.getSafePosition(position);
+    const safePosition = getSafePercent(position);
 
     let style = {
       left: `${safePosition}%`,
