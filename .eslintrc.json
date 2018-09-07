@@ -1,0 +1,9 @@
+{
+  "parser": "babel-eslint",
+  "extends": "airbnb-base",
+  "plugins": ["react", "jsx-a11y", "import"],
+  "rules": {
+    "import/prefer-default-export": "off",
+    "react/jsx-uses-vars": [2]
+  }
+}

@@ -21,12 +21,11 @@ Where 0 = at the extreme left and 100 = at the extreme right.
 Position only accepts values between 0 and 100.
 */
 
-import * as React from "react";
-import classnames from "classnames";
-import invariant from "invariant";
-import { Transition } from "react-transition-group";
-import { transitions } from "./transitions";
-import { getSafePercent } from "../../utils";
+import * as React from 'react';
+import invariant from 'invariant';
+import { Transition } from 'react-transition-group';
+import { transitions } from './transitions';
+import { getSafePercent } from '../../utils';
 
 type StepProps = {|
   accomplished: boolean,
@@ -36,10 +35,10 @@ type StepProps = {|
     accomplished: boolean,
     transitionState: string,
     index: number,
-    position: number
+    position: number,
   }) => React.Node,
-  transition?: "scale" | "rotate" | "skew",
-  transitionDuration?: number
+  transition?: 'scale' | 'rotate' | 'skew',
+  transitionDuration?: number,
 |};
 
 export class Step extends React.Component<StepProps> {
@@ -50,27 +49,27 @@ export class Step extends React.Component<StepProps> {
       index,
       children,
       transition = null,
-      transitionDuration = 300
+      transitionDuration = 300,
     } = this.props;
 
     const safePosition = getSafePercent(position);
 
     let style = {
       left: `${safePosition}%`,
-      transitionDuration: `${transitionDuration}ms`
+      transitionDuration: `${transitionDuration}ms`,
     };
 
     return (
       <Transition in={accomplished} timeout={transitionDuration}>
-        {state => {
+        {(state) => {
           if (transition) {
             invariant(
               transitions[transition] != null,
-              `${transition} is not listed in the built-in transitions.`
+              `${transition} is not listed in the built-in transitions.`,
             );
             style = {
               ...style,
-              ...transitions[transition][state]
+              ...transitions[transition][state],
             };
           }
 
@@ -80,7 +79,7 @@ export class Step extends React.Component<StepProps> {
                 accomplished,
                 position: safePosition,
                 transitionState: state,
-                index
+                index,
               })}
             </div>
           );

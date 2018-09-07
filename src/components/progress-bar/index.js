@@ -20,11 +20,10 @@ which are used in the <Step/> component.
 If nothing is passed, it will renders a progress bar without any intermediate steps.
 */
 
-import * as React from "react";
-import invariant from "invariant";
-import classnames from "classnames";
-import { Step } from "../step";
-import { getSafePercent, getStepPosition } from "../../utils";
+import * as React from 'react';
+import invariant from 'invariant';
+import { Step } from '../step';
+import { getSafePercent, getStepPosition } from '../../utils';
 
 type ProgressBarProps = {|
   percent: number,
@@ -35,7 +34,7 @@ type ProgressBarProps = {|
   width?: number,
   height?: number,
   hasStepZero?: boolean,
-  text?: string
+  text?: string,
 |};
 
 export class ProgressBar extends React.Component<ProgressBarProps> {
@@ -49,39 +48,28 @@ export class ProgressBar extends React.Component<ProgressBarProps> {
       width = null,
       height = null,
       hasStepZero = true,
-      text = null
+      text = null,
     } = this.props;
 
     invariant(
-      !(
-        stepPositions.length > 0 &&
-        stepPositions.length !== React.Children.count(children)
-      ),
-      "When specifying a stepPositions props, the number of children must match the length of the positions array."
+      !(stepPositions.length > 0 && stepPositions.length !== React.Children.count(children)),
+      'When specifying a stepPositions props, the number of children must match the length of the positions array.',
     );
 
     const safePercent = getSafePercent(percent);
 
     return (
-      <div
-        className="progressBar"
-        style={{ background: unfillBackground, width, height }}
-      >
+      <div className="progressBar" style={{ background: unfillBackground, width, height }}>
         {/* Here we're looping over the children to clone them and add them custom props */}
         {React.Children.map(children, (step, index) => {
-          const position =
-            stepPositions.length > 0
-              ? stepPositions[index]
-              : getStepPosition(
-                  React.Children.count(children),
-                  index,
-                  hasStepZero
-                );
+          const position = stepPositions.length > 0
+            ? stepPositions[index]
+            : getStepPosition(React.Children.count(children), index, hasStepZero);
 
           return React.cloneElement(step, {
             accomplished: position <= safePercent,
             position,
-            index
+            index,
           });
         })}
 
@@ -91,7 +79,7 @@ export class ProgressBar extends React.Component<ProgressBarProps> {
           className="progression"
           style={{
             background: fillBackground,
-            width: `${safePercent}%`
+            width: `${safePercent}%`,
           }}
         />
       </div>
