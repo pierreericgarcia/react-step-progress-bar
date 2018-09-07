@@ -1,0 +1,66 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Create your own step transition · react-step-progress-bar</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="With react-step-progress-bar, you&#x27;re not limited to built-ins transitions. You can build your own. All of the transition logic is managed by the great library [react-transition-group](https://reactcommunity.org/react-transition-group/)."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Create your own step transition · react-step-progress-bar"/><meta property="og:type" content="website"/><meta property="og:url" content="https://react-step-progress-bar.herokuapp.com/index.html"/><meta property="og:description" content="With react-step-progress-bar, you&#x27;re not limited to built-ins transitions. You can build your own. All of the transition logic is managed by the great library [react-transition-group](https://reactcommunity.org/react-transition-group/)."/><meta property="og:image" content="https://react-step-progress-bar.herokuapp.com/img/react-step-progress-bar-logo.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://react-step-progress-bar.herokuapp.com/img/react-step-progress-bar-logo.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="https://unpkg.com/vanilla-back-to-top@7.1.14/dist/vanilla-back-to-top.min.js"></script><script>
+        document.addEventListener('DOMContentLoaded', function() {
+          addBackToTop(
+            {"zIndex":100}
+          )
+        });
+        </script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/react-step-progress-bar-logo.png" alt="react-step-progress-bar"/><h2 class="headerTitleWithLogo">react-step-progress-bar</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/installation" target="_self">Docs</a></li><li class=""><a href="/en/examples" target="_self">Examples</a></li><li class=""><a href="https://github.com/pierreericgarcia/react-step-progress-bar" target="_self">GitHub</a></li><li class=""><a target="_self"></a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Guide</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Getting Started</h3><ul><li class="navListItem"><a class="navItem" href="/docs/installation">Installation</a></li><li class="navListItem"><a class="navItem" href="/docs/first-steps">First steps</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Guide</h3><ul><li class="navListItem"><a class="navItem" href="/docs/custom-step-guide">Create your custom step</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/step-transition-guide">Create your own step transition</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">API</h3><ul><li class="navListItem"><a class="navItem" href="/docs/step-api">&lt;Step/&gt;</a></li><li class="navListItem"><a class="navItem" href="/docs/progress-bar-api">&lt;ProgressBar/&gt;</a></li></ul></div></div></section></div><script>
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Create your own step transition</h1></header><article><div><span><p>With react-step-progress-bar, you're not limited to built-ins transitions. You can build your own. All of the transition logic is managed by the great library <a href="https://reactcommunity.org/react-transition-group/">react-transition-group</a>.</p>
+<p>Because of using the <code>&lt;Transition/&gt;</code> component of the <a href="https://reactcommunity.org/react-transition-group/">react-transition-group</a> internally, most of the following content will be similar to its original documentation, which you can find here. The only difference is that we'll look at practical examples on how to leverage the power of <a href="https://reactcommunity.org/react-transition-group/">react-transition-group</a> for building amazing steps.</p>
+<h3><a class="anchor" aria-hidden="true" id="4-transition-steps"></a><a href="#4-transition-steps" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>4 transition steps</h3>
+<p>Each time a step switch between unaccomplished to accomplished (or vice versa), the <code>&lt;Step/&gt;</code> <code>transitionState</code> goes through 4 steps.</p>
+<ul>
+<li><strong>entering</strong></li>
+<li><strong>entered</strong></li>
+<li><strong>exiting</strong></li>
+<li><strong>exited</strong></li>
+</ul>
+<p>You can create a styles object containing those 4 steps associated with CSS rules.</p>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">const</span> transitionStyles = {
+  <span class="hljs-attr">entering</span>: { <span class="hljs-attr">transform</span>: <span class="hljs-string">"scale(1.5)"</span> },
+  <span class="hljs-attr">entered</span>: { <span class="hljs-attr">transform</span>: <span class="hljs-string">"scale(1)"</span> },
+  <span class="hljs-attr">exiting</span>: { <span class="hljs-attr">transform</span>: <span class="hljs-string">"scale(1.5)"</span> },
+  <span class="hljs-attr">exited</span>: { <span class="hljs-attr">transform</span>: <span class="hljs-string">"scale(1)"</span> }
+};
+</code></pre>
+<p>This object properties can be accessed dynamically using the <code>transitionState</code> value returned by the <code>&lt;Step/&gt;</code> component.</p>
+<pre><code class="hljs css language-jsx">&lt;Step&gt;
+  {({ accomplished, transitionState, index }) =&gt; (
+    &lt;div
+      style={transitionStyles[transitionState]}
+      className={`customStep ${accomplished ? "accomplished" : ""}`}
+    &gt;
+      {index}
+    &lt;/div&gt;
+  )}
+&lt;/Step&gt;
+</code></pre>
+<p>The CSS rules will be injected depending on the current <code>transitionState</code>.</p>
+<p>The result will be a step with a scale transition triggered at each accomplished / unaccomplished toggle.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/custom-step-guide">← Create your custom step</a><a class="docs-next button" href="/docs/step-api">Step API →</a></div></div></div><nav class="onPageNav"></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/react-step-progress-bar-logo.png" alt="react-step-progress-bar" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/installation">Getting Started</a><a href="/docs/custom-step-guide">Guides</a><a href="/docs/step-api">API Reference</a><a href="/examples">Examples</a></div><div><h5>Community</h5><a href="https://medium.com/@pierrericgarcia" target="_blank" rel="noreferrer noopener">Medium</a><a href="https://twitter.com/pierrericgarcia" target="_blank" rel="noreferrer noopener">Twitter</a></div><div><h5>More</h5><a href="https://github.com/pierreericgarcia/react-step-progress-bar">GitHub</a><a class="github-button" href="https://github.com/pierreericgarcia/react-step-progress-bar" data-icon="octicon-star" data-count-href="/pierreericgarcia/react-step-progress-bar/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Made with 💘 by <a href="https://github.com/pierreericgarcia">pierreericgarcia</a></section></footer></div><script>window.twttr=(function(d,s, id){var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};if(d.getElementById(id))return t;js=d.createElement(s);js.id=id;js.src='https://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js, fjs);t._e = [];t.ready = function(f) {t._e.push(f);};return t;}(document, 'script', 'twitter-wjs'));</script></body></html>
