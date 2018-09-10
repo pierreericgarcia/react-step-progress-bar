@@ -29,8 +29,8 @@ type ProgressBarProps = {|
   percent: number,
   children: React.ChildrenArray<React.Element<typeof Step>>,
   stepPositions?: Array<number>,
-  unfillBackground?: string,
-  fillBackground?: string,
+  unfilledBackground?: string,
+  filledBackground?: string,
   width?: number,
   height?: number,
   hasStepZero?: boolean,
@@ -43,8 +43,8 @@ export class ProgressBar extends React.Component<ProgressBarProps> {
       percent,
       children,
       stepPositions = [],
-      unfillBackground = null,
-      fillBackground = null,
+      unfilledBackground = null,
+      filledBackground = null,
       width = null,
       height = null,
       hasStepZero = true,
@@ -59,7 +59,7 @@ export class ProgressBar extends React.Component<ProgressBarProps> {
     const safePercent = getSafePercent(percent);
 
     return (
-      <div className="RSPBprogressBar" style={{ background: unfillBackground, width, height }}>
+      <div className="RSPBprogressBar" style={{ background: unfilledBackground, width, height }}>
         {/* Here we're looping over the children to clone them and add them custom props */}
         {React.Children.map(children, (step, index) => {
           const position = stepPositions.length > 0
@@ -78,7 +78,7 @@ export class ProgressBar extends React.Component<ProgressBarProps> {
         <div
           className="RSPBprogression"
           style={{
-            background: fillBackground,
+            background: filledBackground,
             width: `${safePercent}%`,
           }}
         />
