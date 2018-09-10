@@ -26,7 +26,10 @@
 </p>
 
 <p align="center" >
-  🌐 <a href="https://react-step-progress-bar.herokuapp.com/">LIVE DEMO</a> 🌐
+  📚 <a href="https://pierreericgarcia.github.io/react-step-progress-bar">READ THE DOCS</a> 📚
+</p>
+<p align="center" >
+  🌐 <a href="https://pierreericgarcia.github.io/react-step-progress-bar/examples">LIVE EXAMPLES</a> 🌐
 </p>
 
 ## Key Features
@@ -49,7 +52,9 @@ Or using yarn:
 yarn add react-step-progress-bar
 ```
 
-## Example
+## Examples
+
+For more examples take a look at the [official website](https://pierreericgarcia.github.io/react-step-progress-bar).
 
 ### Simple progress bar
 
@@ -120,6 +125,13 @@ class StepProgressBar extends React.Component {
   }
 }
 ```
+
+## Guides
+
+If you want an in-depth view of how to create your own custom steps and custom step transitions, the [official website](https://pierreericgarcia.github.io/react-step-progress-bar/) have some dedicated guides.
+
+- [Create your custom step](https://pierreericgarcia.github.io/react-step-progress-bar/docs/custom-step-guide)
+- [Create your own step transition](https://pierreericgarcia.github.io/react-step-progress-bar/docs/step-transition-guide)
 
 ## API
 
