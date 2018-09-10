@@ -59,7 +59,7 @@ export class ProgressBar extends React.Component<ProgressBarProps> {
     const safePercent = getSafePercent(percent);
 
     return (
-      <div className="progressBar" style={{ background: unfillBackground, width, height }}>
+      <div className="RSPBprogressBar" style={{ background: unfillBackground, width, height }}>
         {/* Here we're looping over the children to clone them and add them custom props */}
         {React.Children.map(children, (step, index) => {
           const position = stepPositions.length > 0
@@ -73,10 +73,10 @@ export class ProgressBar extends React.Component<ProgressBarProps> {
           });
         })}
 
-        {text ? <div className="progressBarText">{text}</div> : null}
+        {text ? <div className="RSPBprogressBarText">{text}</div> : null}
 
         <div
-          className="progression"
+          className="RSPBprogression"
           style={{
             background: fillBackground,
             width: `${safePercent}%`,

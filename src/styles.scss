@@ -1,4 +1,4 @@
-.progressBar {
+.RSPBprogressBar {
   height: 10px;
   line-height: 1;
   border-radius: 10px;
@@ -9,7 +9,7 @@
   align-items: center;
   z-index: 0;
 
-  .step {
+  .RSPBstep {
     display: inline-flex;
     justify-content: center;
     align-items: center;
@@ -20,7 +20,7 @@
     transition-timing-function: ease;
   }
 
-  .progressBarText {
+  .RSPBprogressBarText {
     color: white;
     font-size: 10px;
     position: absolute;
@@ -29,7 +29,7 @@
     transform: translate(-50%, -50%);
   }
 
-  & .progression {
+  & .RSPBprogression {
     position: absolute;
     transition: width 0.3s ease;
     left: 0;

@@ -74,7 +74,7 @@ export class Step extends React.Component<StepProps> {
           }
 
           return (
-            <div className="step" style={style}>
+            <div className="RSPBstep" style={style}>
               {children({
                 accomplished,
                 position: safePosition,
