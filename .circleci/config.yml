@@ -1,0 +1,35 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/node:8.12.0
+
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "f1:dd:ae:81:5d:3e:71:78:a7:fe:61:59:44:c6:98:18"
+      - run:
+          name: Avoid hosts unknown for github
+          command: echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
+      - run:
+          name: Clone GitHub repository
+          command: git clone -b ${CIRCLE_BRANCH} --single-branch git@github.com:pierreericgarcia/react-step-progress-bar.git --depth=1
+      - run:
+          name: Update npm to latest version
+          command: sudo npm install -g npm@latest
+      - restore_cache:
+          key: dependency-cache-{{ checksum "/home/circleci/repo/react-step-progress-bar/package.json" }}
+      - run:
+          name: Install npm packages
+          command: cd /home/circleci/repo/react-step-progress-bar && npm install --loglevel verbose
+      - save_cache:
+          key: dependency-cache-{{ checksum "/home/circleci/repo/react-step-progress-bar/package.json" }}
+          paths:
+            - /home/circleci/repo/react-step-progress-bar/node_modules
+      - run:
+          name: Run tests
+          command: cd /home/circleci/repo/react-step-progress-bar && npm run test
+      - run:
+          name: Run lint
+          command: cd /home/circleci/repo/react-step-progress-bar && npm run lint
