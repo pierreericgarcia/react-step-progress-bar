@@ -10,6 +10,9 @@ jobs:
           fingerprints:
             - "f1:dd:ae:81:5d:3e:71:78:a7:fe:61:59:44:c6:98:18"
       - run:
+          name: Create ssh folder
+          command: mkdir ~/.ssh/config
+      - run:
           name: Avoid hosts unknown for github
           command: echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
       - run:
