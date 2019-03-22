@@ -25,7 +25,7 @@
   "dependencies": {
     "classnames": "^2.2.6",
     "invariant": "^2.2.4",
-    "react-transition-group": "^2.4.0"
+    "react-transition-group": "^2.7.0"
   },
   "scripts": {
     "build-css": "node-sass-chokidar src/ -o .",
