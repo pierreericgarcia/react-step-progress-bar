@@ -59,6 +59,6 @@
     "prettier-eslint": "^8.8.2",
     "react": ">=16.11.0",
     "react-dom": "^16.11.0",
-    "react-test-renderer": "^16.4.2"
+    "react-test-renderer": "^16.11.0"
   }
 }
