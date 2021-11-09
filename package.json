@@ -6,6 +6,9 @@
     "url": "https://github.com/pierreericgarcia/react-step-progress-bar"
   },
   "description": "A library to create stunning progress bars and steps in React.",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "keywords": [
     "reactjs",
     "react",
