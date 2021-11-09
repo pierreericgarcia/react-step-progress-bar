@@ -4,3 +4,4 @@ dist/
 /*.css
 /.DS_Store
 /.env
+/.npmrc
