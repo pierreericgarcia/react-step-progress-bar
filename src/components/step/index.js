@@ -21,11 +21,11 @@ Where 0 = at the extreme left and 100 = at the extreme right.
 Position only accepts values between 0 and 100.
 */
 
-import * as React from 'react';
-import invariant from 'invariant';
-import { Transition } from 'react-transition-group';
-import { transitions } from './transitions';
-import { getSafePercent } from '../../utils';
+import * as React from "react";
+import invariant from "invariant";
+import { Transition } from "react-transition-group";
+import { transitions } from "./transitions";
+import { getSafePercent } from "../../utils";
 
 type StepProps = {|
   accomplished: boolean,
@@ -37,7 +37,7 @@ type StepProps = {|
     index: number,
     position: number,
   }) => React.Node,
-  transition?: 'scale' | 'rotate' | 'skew',
+  transition?: "scale" | "rotate" | "skew",
   transitionDuration?: number,
 |};
 
@@ -65,7 +65,7 @@ export class Step extends React.Component<StepProps> {
           if (transition) {
             invariant(
               transitions[transition] != null,
-              `${transition} is not listed in the built-in transitions.`,
+              `${transition} is not listed in the built-in transitions.`
             );
             style = {
               ...style,

@@ -1,8 +1,5 @@
 /node_modules
 /src/*.css
-/*.js
-/*.js.map
-/*.mjs
-/*.mjs.map
+dist/
 /*.css
 /.DS_Store

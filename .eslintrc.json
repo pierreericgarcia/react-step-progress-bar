@@ -1,9 +1,14 @@
 {
+  "env": {
+    "browser": true,
+    "jest": true
+  },
+  "extends": ["plugin:airbnb-base/recommended", "plugin:react/recommended"],
+  "settings": {
+    "react": {
+      "version": "16.0"
+    }
+  },
   "parser": "babel-eslint",
-  "extends": "airbnb-base",
-  "plugins": ["react", "jsx-a11y", "import"],
-  "rules": {
-    "import/prefer-default-export": "off",
-    "react/jsx-uses-vars": [2]
-  }
+  "plugins": ["babel"]
 }
