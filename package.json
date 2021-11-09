@@ -1,6 +1,10 @@
 {
-  "name": "react-step-progress-bar",
+  "name": "@pierreericgarcia/react-step-progress-bar",
   "version": "1.0.3",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pierreericgarcia/react-step-progress-bar"
+  },
   "description": "A library to create stunning progress bars and steps in React.",
   "keywords": [
     "reactjs",
