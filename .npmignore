@@ -1,5 +1,4 @@
 /src
 /node_modules
-/.flowconfig
 /.gitignore
 /.env
