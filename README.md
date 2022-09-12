@@ -43,13 +43,13 @@
 To use this library, you'll need the [npm](http://npmjs.com) CLI installed on your computer. From your command line, using npm:
 
 ```bash
-npm install @pierreericgarcia/react-step-progress-bar
+npm install react-step-progress-bar
 ```
 
 Or using yarn:
 
 ```bash
-yarn add @pierreericgarcia/react-step-progress-bar
+yarn add react-step-progress-bar
 ```
 
 ## Examples
